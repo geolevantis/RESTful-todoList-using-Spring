@@ -1,9 +1,12 @@
 package com.todolist.todoListGeo.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
 @Entity
 public class TodoItem {
 
@@ -15,12 +18,9 @@ public class TodoItem {
     private String content;
     private boolean completed;
 
-    public TodoItem(){
+    public TodoItem(){ }
 
-    }
-
-    public TodoItem(int id, String title, String content, boolean completed) {
-        this.id = id;
+    public TodoItem(String title, String content, boolean completed) {
         this.title = title;
         this.content = content;
         this.completed = completed;
