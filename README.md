@@ -1,8 +1,8 @@
 # RESTful-todoList-using-Spring
 
-A very simple implementation of a ToDo List web application using Spring Framework. 
+A very simple implementation of a ToDo List web application using Spring Framework and in-memory Database.
 
-Supported features:
+Supported features(using Spring Data JPA):
 
 - Get all tasks
 - Get task by ID
