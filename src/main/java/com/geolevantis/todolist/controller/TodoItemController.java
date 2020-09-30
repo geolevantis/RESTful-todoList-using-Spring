@@ -1,48 +1,48 @@
-package com.todolist.todoListGeo.controller;
+package com.geolevantis.todolist.controller;
 
-import com.todolist.todoListGeo.model.TodoItem;
-import com.todolist.todoListGeo.service.TodoRepository;
+import com.geolevantis.todolist.repository.TodoItemRepository;
+import com.geolevantis.todolist.model.TodoItem;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/toDo")
-public class TodoController {
+@RequestMapping(value = "/todo")
+public class TodoItemController {
+
+    private final TodoItemRepository todoItemRepository;
 
     @Autowired
-    private TodoRepository todoRepository;
-
+    public TodoItemController(TodoItemRepository todoItemRepository) {
+        this.todoItemRepository = todoItemRepository;
+    }
 
     @GetMapping
-    private List<TodoItem> getAll() {
-        return todoRepository.findAll();
+    private List<TodoItem> findAll() {
+        return todoItemRepository.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    private Optional<TodoItem> getById(@PathVariable int id)
-            throws ResourceNotFoundException {
-        todoRepository
+    private TodoItem findById(@PathVariable int id) throws ResourceNotFoundException {
+        return todoItemRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found on :: " + id));
-        return todoRepository.findById(id);
-
     }
-
 
     @PostMapping
     private TodoItem save(@RequestBody TodoItem todoItem) {
-        return todoRepository.save(todoItem);
+        return todoItemRepository.save(todoItem);
     }
 
     @PutMapping
     private TodoItem update(@RequestBody TodoItem todoItem) {
-        return todoRepository.save(todoItem);
+        // todo update something that already exists, you need to look it up first!
+        return todoItemRepository.save(todoItem);
     }
 
+    // todo we generally avoid commented out code into the repository
 //    @PutMapping(value = "/{id}")
 //    private TodoItem updateById(@PathVariable int id, @RequestBody TodoItem todoItem)
 //            throws ResourceNotFoundException {
@@ -53,17 +53,13 @@ public class TodoController {
 //
 //    }
 
-
-
     @DeleteMapping(value = "/{id}")
-    private void delete(@PathVariable int id) {
-        todoRepository.deleteById(id);
+    private void deleteById(@PathVariable int id) {
+        todoItemRepository.deleteById(id);
     }
 
     @DeleteMapping
     private void deleteAll() {
-        todoRepository.deleteAll();
+        todoItemRepository.deleteAll();
     }
-
-
 }

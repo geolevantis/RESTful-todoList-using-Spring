@@ -1,4 +1,4 @@
-package com.todolist.todoListGeo.model;
+package com.geolevantis.todolist.model;
 
 import lombok.Data;
 
@@ -10,15 +10,16 @@ import javax.persistence.Id;
 @Entity
 public class TodoItem {
 
+    @Id
+    @GeneratedValue
     private int id;
-
-
 
     private String title;
     private String content;
     private boolean completed;
 
-    public TodoItem(){ }
+    public TodoItem() {
+    }
 
     public TodoItem(String title, String content, boolean completed) {
         this.title = title;
@@ -26,8 +27,6 @@ public class TodoItem {
         this.completed = completed;
     }
 
-    @Id
-    @GeneratedValue
     public int getId() {
         return id;
     }
