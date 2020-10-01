@@ -27,7 +27,7 @@ public class TodoController {
             throws ResourceNotFoundException {
         todoRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found on :: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Task with "+id +" not found!"));
         return todoRepository.findById(id);
 
     }
